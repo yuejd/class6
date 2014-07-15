@@ -1,6 +1,59 @@
-{% extends "base.html" %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>Information</title>
+<style type="text/css">
+.person_tr td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+.mobile_td {
+    width: 80px;
+}
+.region_td {
+    width: 100px;
+}
+.other_td {
+    width: 440px;
+}
 
-{% block body %}
-	<img src="{{ static_url("images/tornado.png") }}">
-	<p>This is a simple example to show how Tornado can be deployed on Openshift easily.</p>
-{% end %}
+</style>
+</head>
+<body style="margin-left: 20%; margin-right: 20%;">
+    <div ><h3 style="text-align: center; color: blue;">Welcome {{ qq }}</h3></div>
+    <div style="position: absolute; top: 10px; right: 20%;">
+        <form action="/logout" method="get">
+            <input type="submit" value="logout" />
+        </form>
+    </div>
+    <table border="1" style="font-size: 11px; color: rgb(51, 51, 51); border-color: rgb(102, 102, 102); border-collapse: collapse; border-width: 1px;">
+        <tr>
+            <td>name</td>
+            <td>QQ</td>
+            <td>mobile</td>
+            <td>活动范围</td>
+            <td>备注</td>
+        </tr>
+    {% for person in persons %}
+    <tr class="person_tr">
+        <td>{{ person.name }}</td>
+        <td>{{ person.qq }}</td>
+        <td class="mobile_td">{{ person.pnumber }}</td>
+        <td class="region_td">{{ person.address }}</td>
+        <td class="other_td"><div style="width: 430px; overflow: hidden;">{{ person.others }}</div></td>
+        {% if qq == person.qq %}
+        <td>
+        <form action="/edit" method="get">
+            <input type="submit" value="edit" />
+        </form>
+        </td>
+        {% end %}
+    </tr>
+    {% end %}
+</table>
+</body>
+</html>

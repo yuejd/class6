@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#coding=utf-8
 
 from tornado.options import define,options
 
@@ -17,7 +18,9 @@ def syncdb():
         for name_qq in qqlist:
             pname, pqq = name_qq.split(',')
             #print pname, ':', pqq.strip()
-            models.Person.create(name = pname, qq = pqq.strip())
+            models.Person.create(name = pname, 
+                                 qq = pqq.strip(),
+                                 login_times = 0)
 
 if __name__ == '__main__':
     options.parse_command_line()

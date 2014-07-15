@@ -1,24 +1,28 @@
+#!/usr/bin/env python
+#coding=utf-8
+
 from peewee import *
-from datetime import date
 from config import *
 
 database = MySQLDatabase(DB_NAME, 
         **{"passwd": DB_PASSWD, 
             "host": DB_HOST, 
             "port": DB_PORT, 
-            "user": DB_USER})
+            "user": DB_USER,
+            "charset": "utf8"})
 
 class BaseModel(Model):
     class Meta:
         database = database
 
 class Person(BaseModel):
-    name = CharField()
-    pnumber = CharField()
-    address = CharField()
+    name = CharField(max_length=40)
     qq = CharField()
-    mdf_time = DateTimeField()
-    login_times = IntegerField()
+    pnumber = CharField(null=True)
+    address = TextField(null=True)
+    others = TextField(null=True)
+    mdf_time = DateTimeField(null=True)
+    login_times = IntegerField(null=True)
 
 class LoginInfo(BaseModel):
     login_time = DateTimeField()

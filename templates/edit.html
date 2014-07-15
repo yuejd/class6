@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>Edit your Info</title>
+<style type="text/css">
+form div {
+padding-bottom: 20px;
+}
+.address_div input {
+width: 200px;
+}
+.other_div input {
+width:400px;
+}
+    
+</style>
+</head>
+<body>
+<div class="form_div">
+    <form action="/edit" method="post">
+        {% raw xsrf_form_html() %}
+        <h3>{{ person.name }}</h3>
+        <h3>{{ person.qq }}</h3>
+        <div class="mobile_div">
+        电话：<br>
+        <input type="text" name="mobile" value="{{ person.pnumber }}"><br>
+        </div>
+        <div class="address_div">
+        常活动范围:<br>
+        <input type="text" name="address" value="{{ person.address }}"><br>
+        </div>
+        <div class="other_div">
+        备注(日常时间安排等)：<br>
+        <input type="text" name="others" value="{{ person.others }}"><br>
+        </div>
+        <input type="submit" value="Save" />
+    </form>
+</div>
+</body>
+</html>
