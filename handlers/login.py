@@ -20,7 +20,7 @@ class LoginHandler(BaseHandler):
         except Person.DoesNotExist:
             log = "对不起,仅幻想6班QQ群用户可以登陆"
             self.render("login.html", message = log)
-        LoginInfo.create(login_time = datetime.now(), qq = qq)
+            LoginInfo.create(login_time = datetime.now(), qq = qq)
 
 class LogoutHandler(BaseHandler):
     def get(self):

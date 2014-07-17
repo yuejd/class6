@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #coding=utf8
 
-from models import Person
+from models import Person, LoginInfo
 from handlers.base import BaseHandler
 import tornado.web
 from datetime import datetime
@@ -9,9 +9,11 @@ from datetime import datetime
 class IndexHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
+        current_qq = self.current_user
         self.render('index.html', 
-                    qq = self.current_user,
+                    qq = current_qq,
                     persons = Person.select())
+        LoginInfo.create(login_time = datetime.now(), qq = current_qq)
 
 class EditHandler(BaseHandler):
     @tornado.web.authenticated
